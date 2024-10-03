@@ -11,4 +11,3 @@ function Connect(keypressed){
         window.location = "https://google.com"; // change website to a variable for user input 
     }
 }
-
