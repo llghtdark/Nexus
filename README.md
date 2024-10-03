@@ -1,2 +1,2 @@
 # Nexus
-a lil readmeh
+Homepage based around shortcuts
