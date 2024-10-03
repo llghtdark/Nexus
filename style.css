@@ -1,0 +1,10 @@
+body {
+    background-color: #141414;
+    color: #f1ede7;
+    font-family:monospace;
+}
+
+.main {
+    max-width: fit-content;
+    margin-inline: auto;
+}
