@@ -6,4 +6,63 @@ body {
 .main {
     max-width: fit-content;
     margin-inline: auto;
+    text-align: center;
 }
+#clock {
+    font-size: 40px;
+    margin: 0 0 10px;
+}
+
+.container {
+    max-width: fit-content;
+    margin-inline: auto;
+  }
+  
+  .row {
+    width: 100%;
+    height: 60px;
+  }
+  .two{
+    margin: 0 0 5px 85px;
+  }
+  .three{
+    margin: 0 0 0 100px;
+  }
+  .four{
+    margin: 5px 0 0 0;
+  }
+  .five{
+    margin: 10px 0 0 125px;
+  }
+  
+  button {
+    color: #f1ede7;
+    font-weight: 500;
+    width: 55px;
+    height: 55px;
+    border: none;
+    background: #262626;
+
+    font-size: 15px;
+    margin-left: 5px;
+    outline: none;
+    font-family: monospace;
+    border-radius: 20%;
+  }
+  .shift {
+    width: 125px;
+    border-radius: 10px;
+   
+  }
+  
+  .last {
+    width: 56px;
+    border-radius: 10px;
+  }
+  
+  .space {
+    width: 398px;
+    border-radius: 10px;
+  
+  }
+  
