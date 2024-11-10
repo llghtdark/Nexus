@@ -50,6 +50,7 @@ button {
   outline: none;
   font-family: monospace;
   border-radius: 20%;
+  cursor: pointer;
 }
 
 button:active{
@@ -72,4 +73,15 @@ button:active{
   border-radius: 10px;
 
 }
+
+.open-panel-btn {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #111;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
   
