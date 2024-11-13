@@ -70,8 +70,9 @@
     </div>
 
     <div class="open-panel-btn">
-    <button onclick="exportLinks()">⇪</button>
-    <button onclick="importLinks()">⇩</button>
+    <button onclick="exportLinks()" title="Export Links">⇪</button>
+    <button onclick="importLinks()" title="Import Links">⇩</button>
+    <input type="file" id="fileInput" style="display: none;" accept=".txt" />
     </div>
     
     <script src="main.js"></script>
