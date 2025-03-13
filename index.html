@@ -10,9 +10,10 @@
     <script src="coolClock.js"></script>
     
     <div class="main">
-        <h1>Welcome to Nexus</h1> 
+        <h1 id="WelcomeText">Welcome to Nexus</h1> 
         <h3 id="clock"></h3>
     </div>
+
     <div class="keyboard">
         <!-- <div class="row one">
             <button id=""> data-link="" onclick="editLink(this.id)"~</button>
@@ -20,7 +21,7 @@
             <button id=""> data-link="" onclick="editLink(this.id)"2</button>
             <button id=""> data-link="" onclick="editLink(this.id)"3</button>
         </div> -->
-        <p>press a button to edit it</p>
+        <p>click a button to edit it</p>
         <div class="row two">
             <button id="Q" data-link="" onclick="editLink(this.id)">Q</button>
             <button id="W" data-link="" onclick="editLink(this.id)">W</button>
@@ -69,12 +70,31 @@
        </div>
     </div>
 
-    <div class="open-panel-btn">
-    <button onclick="exportLinks()" title="Export Links">⇪</button>
-    <button onclick="importLinks()" title="Import Links">⇩</button>
+    <div id="sidePanel" class="side-panel">
+        <h3>Options</h3>
+        <label>
+          <input type="checkbox" id="titleToggle" onchange="toggleTitle()" checked> Show Welcome Text
+        </label>
+        <label>
+          <input type="checkbox" id="clockToggle" onchange="toggleClock()" checked> Show Clock
+        </label>
+        <label for="themeSelector">Choose Theme:</label>
+        <select id="themeSelector" onchange="applyTheme(this.value)">
+            <option value="dark">Dark</option>
+            <option value="solar">Solar Light</option>
+            <option value="purple">Purple</option>
+        </select>
+        <br>
+        <button class="ExportImportButtons" onclick="exportLinks()" title="Export Links">⇪</button>
+        <button class="ExportImportButtons" onclick="importLinks()" title="Import Links">⇩</button>
+    </div>
+
+    <div class="settings-btn">
+    <button onclick="togglePanel()" title="Settings">⏣</button>
     <input type="file" id="fileInput" style="display: none;" accept=".txt" />
     </div>
     
     <script src="main.js"></script>
+    <script src="toggles.js"></script>
 </body>
 </html>

@@ -1,3 +1,9 @@
+const themes = {
+    dark: { bg: "#141414", text: "#f1ede7", bbg: "#262626", textAlt: "#141414", bbgAct: "#f38aff"},
+    solar: { bg: "#f1ede7", text: "#141414", bbg: "#ffedd9", textAlt: "#141414", bbgAct: "#ffb485" },
+    purple: { bg: "#2d1b42", text: "#f38aff", bbg: "#733261", textAlt: "#141414", bbgAct: "#fc03b6"}
+};
+
 document.addEventListener('keydown', function(event) {
     let key = event.key.toUpperCase();
     if (document.getElementById(key)) {
@@ -15,11 +21,11 @@ function Connect(keypressed){
 }
 
 function editLink(buttonID){
-    let newLink = prompt("Enter a new URL for the '" + buttonID + "' button. (Let it blank to clear)");
+    let newLink = prompt("Enter a new URL for the '" + buttonID + "' button. (Leave it blank to clear)");
     let button = document.getElementById(buttonID);
     console.log(newLink); 
     if (newLink === "") {
-        RemButton(button, newLink);
+        RemButton(button);
     } else if (newLink) {
         AddButton(button, newLink);
     }
@@ -83,37 +89,99 @@ function importLinks(){
     };
 }
 
-function AddButton(key, link){
-    key.setAttribute("data-link", link);
-    key.setAttribute("title", link); // Shows the link on hover
-    key.style.backgroundColor = "#f38aff";
-    key.style.color = "#141414";
-    localStorage.setItem(key.id, link);  // Save in localStorage
-    console.log("added");
+function AddButton(button, link) {
+    let data = JSON.parse(localStorage.getItem("nexusData"))
+    button.dataset.link = link;
+    button.title = link;
+    button.style.backgroundColor = themes[data.selectedTheme].bbgAct;
+    button.style.color = themes[data.selectedTheme].textAlt;
+    saveData();
 }
-function RemButton(key){
-    key.setAttribute("data-link", "");
-    key.setAttribute("title", "");
-    key.style.backgroundColor = "";
-    key.style.color = "#f1ede7";
-    localStorage.removeItem(key.id);
-    console.log("cleared");
+function RemButton(button) {
+    let data = JSON.parse(localStorage.getItem("nexusData")) || { links: {} };
+    button.dataset.link = "";
+    button.title = "";
+    button.style.backgroundColor = themes[data.selectedTheme].bbg;
+    button.style.color = themes[data.selectedTheme].text;
+
+    delete data.links[button.id]; // Remove from storage
+    saveData();
 }
 
-function loadLinks(){
-    let buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-        let savedLink = localStorage.getItem(button.id);
-        if (savedLink) {
-            button.setAttribute("data-link", savedLink);
-            button.style.backgroundColor = "#f38aff";
-            button.style.color = "#141414";
-            button.setAttribute("title", savedLink);
-        }
-        else {
-            button.style.backgroundColor = "";
+let isPopupOpen = false;
+function togglePanel(){
+    isPopupOpen = !isPopupOpen;
+    document.getElementById("sidePanel").style.display = isPopupOpen ? "block" : "none";
+}
+
+function saveData() {
+    const data = {
+        links: {},
+        selectedTheme: localStorage.getItem("selectedTheme") || "dark"
+    };
+
+    document.querySelectorAll("[data-link]").forEach(button => {
+        data.links[button.id] = button.getAttribute("data-link");
+    });
+
+    localStorage.setItem("nexusData", JSON.stringify(data));
+}
+
+function loadData() {
+    const data = JSON.parse(localStorage.getItem("nexusData"));
+    if (!data) return;
+    
+    applyTheme(data.selectedTheme);
+
+    Object.entries(data.links).forEach(([key, link]) => {
+        const button = document.getElementById(key);
+        if (link) {
+            button.setAttribute("data-link", link);
+            button.setAttribute("title", link);
+            button.style.backgroundColor = themes[data.selectedTheme].bbgAct;
+            button.style.color = themes[data.selectedTheme].textAlt;
+        }else {
+            button.style.backgroundColor = themes[data.selectedTheme].bbg;
+            button.style.color = themes[data.selectedTheme].text;
         }
     });
 }
 
-document.addEventListener('DOMContentLoaded', loadLinks);
+function applyTheme(theme) {
+    document.body.style.backgroundColor = themes[theme].bg;
+    document.body.style.color = themes[theme].text;
+
+    document.querySelectorAll("[data-link]").forEach(button => {
+        if (button.dataset.link) {
+            button.style.backgroundColor = themes[theme].bbgAct;
+            button.style.color = themes[theme].textAlt;
+        }else{
+            button.style.backgroundColor = themes[theme].bbg;
+            button.style.color = themes[theme].text;
+        }
+    });
+
+    document.querySelectorAll(".row.five button, .shift").forEach(button => {
+        button.style.backgroundColor = themes[theme].bbg;
+        button.style.color = themes[theme].text;
+    });
+
+    const sidePanel = document.getElementById("sidePanel");
+    sidePanel.style.backgroundColor = themes[theme].bg;
+    sidePanel.style.color = themes[theme].text;
+
+    const themeSelector = document.getElementById("themeSelector");
+    if (themeSelector) themeSelector.value = theme;
+
+    localStorage.setItem('selectedTheme', theme);
+
+    let data = JSON.parse(localStorage.getItem("nexusData")) || { links: {} };
+    data.selectedTheme = theme;
+    localStorage.setItem("nexusData", JSON.stringify(data));
+
+    if (isPopupOpen) {
+        togglePanel();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadData);
