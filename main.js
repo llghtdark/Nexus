@@ -129,7 +129,10 @@ function saveData() {
 
 function loadData() {
     const data = JSON.parse(localStorage.getItem("nexusData"));
-    if (!data) return;
+    if (!data) {
+        data = { links: {}, selectedTheme: "dark" }; // Set a default theme if none exists
+        localStorage.setItem("nexusData", JSON.stringify(data));
+    }
     
     applyTheme(data.selectedTheme);
 
