@@ -1,12 +1,17 @@
 const themes = {
     dark: { bg: "#141414", text: "#f1ede7", bbg: "#262626", textAlt: "#141414", bbgAct: "#f38aff"},
     solar: { bg: "#f1ede7", text: "#141414", bbg: "#ffedd9", textAlt: "#141414", bbgAct: "#ffb485" },
-    purple: { bg: "#2d1b42", text: "#f38aff", bbg: "#733261", textAlt: "#141414", bbgAct: "#fc03b6"}
+    purple: { bg: "#2d1b42", text: "#f38aff", bbg: "#733261", textAlt: "#141414", bbgAct: "#fc03b6"},
+    gruvbox: { bg: "#3c3836", text: "#fe8", bbg: "#d65d0e", textAlt: "#141414", bbgAct: "#fabd2e"},
+    webdump: { bg: "#161616", text: "#f1ede7", bbg: "#81bd80", textAlt: "#262626", bbgAct: "#a1eba0"},
 };
 
 document.addEventListener('keydown', function(event) {
     let key = event.key.toUpperCase();
-    if (document.getElementById(key)) {
+
+    if(key == "SHIFT"){ //add here if you may add the cwasy cwasy
+        togglePanel();
+    }else if (document.getElementById(key)) {
         Connect(key);
     }
 });
@@ -117,8 +122,10 @@ function togglePanel(){
 function saveData() {
     const data = {
         links: {},
-        selectedTheme: localStorage.getItem("selectedTheme") || "dark"
-    };
+        selectedTheme: localStorage.getItem("selectedTheme") || "dark",
+        showTitle: document.getElementById("titleToggle").checked,
+        showClock: document.getElementById("clockToggle").checked
+    }; // aqui vai tudo que eu quero salvar, só pra lembar
 
     document.querySelectorAll("[data-link]").forEach(button => {
         data.links[button.id] = button.getAttribute("data-link");
@@ -130,7 +137,7 @@ function saveData() {
 function loadData() {
     let data = JSON.parse(localStorage.getItem("nexusData"));
     if (!data) {
-        data = { links: {}, selectedTheme: "dark" }; // Set a default theme if none exists
+        data = { links: {}, selectedTheme: "dark", showTitle: true, showClock: true}; // Set a default theme if none exists
         localStorage.setItem("nexusData", JSON.stringify(data));
     }
     
@@ -148,6 +155,15 @@ function loadData() {
             button.style.color = themes[data.selectedTheme].text;
         }
     });
+
+    document.getElementById("titleToggle").checked = data.showTitle;
+    document.getElementById("clockToggle").checked = data.showClock;
+    document.getElementById("WelcomeText").style.display = data.showTitle ? "block" : "none";
+    document.getElementById("clock").style.display = data.showClock ? "block" : "none";
+
+    const clock = document.getElementById('clock');
+    makeDraggable(clock);
+    loadClockPosition();
 }
 
 function applyTheme(theme) {

@@ -11,6 +11,11 @@ body {
 #clock {
     font-size: 40px;
     margin: 0 0 10px;
+    user-select: none;
+    cursor: move;
+    position: absolute;
+    transform-origin: center;
+    transition: transform 0.2s;
 }
 
 .keyboard{
@@ -104,4 +109,5 @@ button {
 }
 #themeSelector {
   width: 100px;
+  margin-top: 10px;
 }

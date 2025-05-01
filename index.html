@@ -8,6 +8,7 @@
 </head>
 <body>
     <script src="coolClock.js"></script>
+    <script src="dragstuff.js"></script>
     
     <div class="main">
         <h1 id="WelcomeText">Welcome to Nexus</h1> 
@@ -77,16 +78,20 @@
         </label>
         <label>
           <input type="checkbox" id="clockToggle" onchange="toggleClock()" checked> Show Clock
-        </label>
+        </label> 
+        <input type="range" id="sizeSlider" min="1" max="7" step="0.2" value="1"><br>
         <label for="themeSelector">Choose Theme:</label>
         <select id="themeSelector" onchange="applyTheme(this.value)">
             <option value="dark">Dark</option>
             <option value="solar">Solar Light</option>
             <option value="purple">Purple</option>
+            <option value="gruvbox">Gruvbox</option>
+            <option value="webdump">WebDump</option>
         </select>
         <br>
         <button class="ExportImportButtons" onclick="exportLinks()" title="Export Links">⇪</button>
         <button class="ExportImportButtons" onclick="importLinks()" title="Import Links">⇩</button>
+        <p>you can also Open this pop up by pressing shift</p>
     </div>
 
     <div class="settings-btn">
