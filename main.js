@@ -4,6 +4,8 @@ const themes = {
     purple: { bg: "#2d1b42", text: "#f38aff", bbg: "#733261", textAlt: "#141414", bbgAct: "#fc03b6"},
     gruvbox: { bg: "#3c3836", text: "#fe8", bbg: "#d65d0e", textAlt: "#141414", bbgAct: "#fabd2e"},
     webdump: { bg: "#161616", text: "#f1ede7", bbg: "#81bd80", textAlt: "#262626", bbgAct: "#a1eba0"},
+    ultrakill: { bg: "#ff1100", text: "#fff", bbg: "#101010", textAlt: "#000", bbgAct: "#fff"},
+    deepblue: { bg: "#414c66", text: "#92ace5", bbg: "#202633", textAlt: "#f1ede7", bbgAct: "#69B0BF"}
 };
 
 document.addEventListener('keydown', function(event) {
