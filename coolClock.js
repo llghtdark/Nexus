@@ -9,3 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   updateClock(); // run immediately
   setInterval(updateClock, 1000); // then repeat every second
 });
+
+function updateScreensaverClock() {
+  const now = new Date();
+  document.getElementById("screensaver-clock").textContent = now.toLocaleTimeString();
+}
+setInterval(updateScreensaverClock, 1000);

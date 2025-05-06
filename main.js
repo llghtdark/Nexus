@@ -126,7 +126,8 @@ function saveData() {
         links: {},
         selectedTheme: localStorage.getItem("selectedTheme") || "dark",
         showTitle: document.getElementById("titleToggle").checked,
-        showClock: document.getElementById("clockToggle").checked
+        showClock: document.getElementById("clockToggle").checked,
+        showCat: document.getElementById("catToggle").checked
     }; // aqui vai tudo que eu quero salvar, só pra lembar
 
     document.querySelectorAll("[data-link]").forEach(button => {
@@ -160,8 +161,11 @@ function loadData() {
 
     document.getElementById("titleToggle").checked = data.showTitle;
     document.getElementById("clockToggle").checked = data.showClock;
+    document.getElementById("catToggle").checked = data.showCat;
+
     document.getElementById("WelcomeText").style.display = data.showTitle ? "block" : "none";
     document.getElementById("clock").style.display = data.showClock ? "block" : "none";
+    document.getElementById("oneko").style.display = data.showCat ? "block" : "none";
 
     const clock = document.getElementById('clock');
     makeDraggable(clock);
@@ -203,6 +207,34 @@ function applyTheme(theme) {
     if (isPopupOpen) {
         togglePanel();
     }
+
+    screensaver.style.backgroundColor = themes[theme].bg;
 }
+
+//DESCANSO DE TELA
+let inactivityTimeout;
+const screensaverDelay = 10000;
+
+const screensaver = document.getElementById("screensaver");
+const displayKeyboard = document.getElementById("keyboard");
+
+function activateScreensaver() {
+  screensaver.style.display = "flex";
+  displayKeyboard.style.display = "none";
+}
+function resetScreensaver() {
+  screensaver.style.display = "none";
+  displayKeyboard.style.display = "";
+}
+function resetInactivityTimer() {
+  resetScreensaver();
+  clearTimeout(inactivityTimeout);
+  inactivityTimeout = setTimeout(activateScreensaver, screensaverDelay);
+}
+["mousemove", "keydown", "click", "touchstart"].forEach(event => {
+  document.addEventListener(event, resetInactivityTimer);
+});
+
+resetInactivityTimer();
 
 document.addEventListener('DOMContentLoaded', loadData);

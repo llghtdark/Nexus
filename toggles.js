@@ -3,9 +3,9 @@ function toggleTitle() {
     const welcomeText = document.getElementById("WelcomeText");
 
     if (checkbox.checked) {
-        welcomeText.style.display = "block"; // Show the text
+        welcomeText.style.display = "block";
     } else {
-        welcomeText.style.display = "none"; // Hide the text
+        welcomeText.style.display = "none";
     }
 
     saveData();
@@ -16,9 +16,21 @@ function toggleClock() {
     const clock = document.getElementById("clock");
 
     if (checkbox.checked) {
-        clock.style.display = "block"; // Show the clock
+        clock.style.display = "block";
     } else {
-        clock.style.display = "none"; // Hide the clock
+        clock.style.display = "none";
+    }
+
+    saveData();
+}
+function toggleCat() {
+    const checkbox = document.getElementById("catToggle");
+    const cat = document.getElementById("oneko");
+
+    if (checkbox.checked) {
+        cat.style.display = "block";
+    } else {
+        cat.style.display = "none";
     }
 
     saveData();

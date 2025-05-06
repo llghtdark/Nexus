@@ -112,3 +112,17 @@ button {
   width: 100px;
   margin-top: 10px;
 }
+
+/*DESCANSO DE TELA*/
+#screensaver {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#screensaver-clock {
+  font-size: 15vw;
+}

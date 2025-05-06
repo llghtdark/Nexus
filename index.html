@@ -16,7 +16,11 @@
         <h3 id="clock"></h3>
     </div>
 
-    <div class="keyboard">
+    <div id="screensaver" style="display: none;">
+        <div id="screensaver-clock"></div>
+    </div>
+
+    <div class="keyboard" id="keyboard">
         <!-- <div class="row one">
             <button id=""> data-link="" onclick="editLink(this.id)"~</button>
             <button id=""> data-link="" onclick="editLink(this.id)"1</button>
@@ -91,6 +95,9 @@
             <option value="ultrakill">ULTRAKILL</option>
             <option value="deepblue">DeepBlue</option>
         </select>
+        <label>
+            <input type="checkbox" id="catToggle" onchange="toggleCat()" checked> Show little kitty cat
+        </label> 
         <br>
         <button class="ExportImportButtons" onclick="exportLinks()" title="Export Links">⇪</button>
         <button class="ExportImportButtons" onclick="importLinks()" title="Import Links">⇩</button>
