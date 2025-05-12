@@ -95,6 +95,10 @@ button {
   font-size: 24px;
 }
 
+div#oneko:hover{
+  cursor: grab;
+}
+
 .side-panel {
   position: fixed;
     top: 50%;
